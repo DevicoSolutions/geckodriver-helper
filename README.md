@@ -22,7 +22,7 @@ it.
 If you're using Bundler and Capybara, it's as easy as:
 
     # Gemfile
-    gem "geckodriver-helper"
+    gem 'geckodriver-helper'
 
 then, in your specs:
 
@@ -44,6 +44,6 @@ MIT licensed, see LICENSE.txt for full details.
 
 # Credit
 
-The idea and some features comes from *[@flavorjones's](https://github.com/flavorjones) project
+The idea and some features comes from [@flavorjones's](https://github.com/flavorjones) project
 `chromedriver-helper`. That saves setup time and works pretty good from the box.
 
