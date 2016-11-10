@@ -1,20 +1,15 @@
-require 'faraday'
-require 'faraday_middleware'
+require 'open-uri'
+require 'json'
 
 module Geckodriver
   class Helper
     class GeckoReleasePageParser
-      GIT_API_URL = 'https://api.github.com'
+      GIT_API_URL = 'https://api.github.com/repos/mozilla/geckodriver/releases'
 
       attr_reader :platform
 
       def initialize(platform)
         @platform = platform
-        @conn = Faraday.new(url: GIT_API_URL) do |faraday|
-          faraday.request :url_encoded
-          faraday.adapter Faraday.default_adapter
-          faraday.response :json, :content_type => /\bjson$/
-        end
       end
 
       def download_url(versions)
@@ -31,8 +26,8 @@ module Geckodriver
       end
 
       def latest_release
-        response = @conn.get('/repos/mozilla/geckodriver/releases')
-        download_url(response.body)
+        result = JSON.parse(open(GIT_API_URL).read)
+        download_url(result)
       end
     end
   end
