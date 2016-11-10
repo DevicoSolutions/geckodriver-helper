@@ -1,0 +1,6 @@
+#! /usr/bin/env ruby
+
+require 'geckodriver/helper'
+
+Geckodriver::Helper.new.update
+
