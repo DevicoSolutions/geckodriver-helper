@@ -1,4 +1,4 @@
-# chromedriver-helper
+# geckodriver-helper
 
 [![Build status](https://travis-ci.org/DevicoSolutions/geckodriver-helper.svg)](https://travis-ci.org/DevicoSolutions/geckodriver-helper)
 
