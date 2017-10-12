@@ -34,7 +34,7 @@ then, in your specs:
 # Updating Geckodriver
 
 If you'd like to force-upgrade to the latest version of geckodriver,
-run the script `geckodriver-update`
+run the script `gecko_updater`
 
 
 # License
