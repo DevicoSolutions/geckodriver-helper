@@ -20,6 +20,7 @@ described by the WebDriver protocol to communicate with Gecko browsers, such as 
 
   s.add_development_dependency "rspec",   "~> 3.0"
   s.add_development_dependency "rake",    "~> 10.0"
+  s.add_development_dependency "http",    "~> 3.0"
 
   s.add_runtime_dependency "archive-zip", "~> 0.7"
 end

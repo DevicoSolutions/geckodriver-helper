@@ -1,5 +1,4 @@
 require 'geckodriver/helper/version'
-require 'geckodriver/helper/gecko_release_page_parser'
 require 'fileutils'
 require 'rbconfig'
 require 'open-uri'
@@ -9,6 +8,7 @@ require 'rubygems/package'
 
 module Geckodriver
   class Helper
+    DRIVER_VERSION = "v0.20.1".freeze
 
     def run *args
       download
@@ -48,15 +48,18 @@ module Geckodriver
     end
 
     def download_url
-      GeckoReleasePageParser.new(platform).latest_release
+      extension = platform.include?('win') ? 'zip' : 'tar.gz'
+      "https://github.com/mozilla/geckodriver/releases/download/#{DRIVER_VERSION}/geckodriver-#{DRIVER_VERSION}-#{platform}.#{extension}"
     end
 
     def binary_path
-      if platform == 'win'
-        File.join platform_install_dir, 'geckodriver.exe'
-      else
-        File.join platform_install_dir, 'geckodriver'
-      end
+      exe = if platform.include?('win')
+              'geckodriver.exe'
+            else
+              'geckodriver'
+            end
+
+      File.join platform_install_dir, exe
     end
 
     def platform_install_dir
@@ -72,18 +75,24 @@ module Geckodriver
     end
 
     def platform
-      cfg = RbConfig::CONFIG
-      case cfg['host_os']
-        when /linux/ then
-          cfg['host_cpu'] =~ /x86_64|amd64/ ? 'linux64' : 'linux32'
-        when /darwin/ then
-          'mac'
+      @platform ||= begin
+        cfg = RbConfig::CONFIG
+        case cfg['host_os']
+        when /linux/
+          append_64_or_32('linux', cfg)
+        when /darwin/
+          'macos'
         else
-          'win'
+          append_64_or_32('win', cfg)
+        end
       end
     end
 
     private
+
+    def append_64_or_32(platform)
+      cfg['host_cpu'] =~ /x86_64|amd64/ ? "#{platform}64" : "#{platform}32"
+    end
 
     def unzip(zipfile)
       Archive::Zip.extract(zipfile, '.', :overwrite => :all)
@@ -106,6 +115,5 @@ module Geckodriver
         end
       end
     end
-
   end
 end
