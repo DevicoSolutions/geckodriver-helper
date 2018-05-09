@@ -90,7 +90,7 @@ module Geckodriver
 
     private
 
-    def append_64_or_32(platform)
+    def append_64_or_32(platform, cfg)
       cfg['host_cpu'] =~ /x86_64|amd64/ ? "#{platform}64" : "#{platform}32"
     end
 
