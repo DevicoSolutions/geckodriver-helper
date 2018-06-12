@@ -35,11 +35,14 @@ module Geckodriver
     end
 
     def unpack_archive(file)
-      if platform == 'win'
+      case file
+      when /\.zip$/
         unzip(file)
-      else
+      when /\.tar\.gz$/
         io = ungzip(file)
         untar(io)
+      else
+        raise "Don't know how to unpack #{file}"
       end
     end
 
