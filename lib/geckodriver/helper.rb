@@ -8,7 +8,7 @@ require 'rubygems/package'
 
 module Geckodriver
   class Helper
-    DRIVER_VERSION = "v0.21.0".freeze
+    DRIVER_VERSION = "v0.23.0".freeze
 
     def run *args
       download
