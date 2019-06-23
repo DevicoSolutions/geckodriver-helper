@@ -1,6 +1,7 @@
 # geckodriver-helper
 
 [![Build status](https://travis-ci.org/DevicoSolutions/geckodriver-helper.svg)](https://travis-ci.org/DevicoSolutions/geckodriver-helper)
+[![Gem Version](https://badge.fury.io/rb/geckodriver-helper.svg)](https://badge.fury.io/rb/geckodriver-helper)
 
 Easy installation and use of [geckodriver](https://github.com/mozilla/geckodriver), that provides the HTTP API 
 described by the WebDriver protocol to communicate with Gecko browsers, such as Firefox.
