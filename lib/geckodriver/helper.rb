@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'geckodriver/helper/version'
 require 'fileutils'
 require 'rbconfig'
