@@ -2,6 +2,6 @@
 
 module Geckodriver
   class Helper
-    VERSION = '0.24.0'
+    VERSION = '0.27.0'
   end
 end
