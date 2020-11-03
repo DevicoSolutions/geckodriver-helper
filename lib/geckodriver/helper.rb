@@ -18,6 +18,7 @@ module Geckodriver
     end
 
     def download hit_network=false
+      remove_if_stale
       return if File.exists?(binary_path) && !hit_network
       url = download_url
       filename = File.basename url
@@ -55,6 +56,16 @@ module Geckodriver
     def download_url
       extension = platform.include?('win') ? 'zip' : 'tar.gz'
       "https://github.com/mozilla/geckodriver/releases/download/#{DRIVER_VERSION}/geckodriver-#{DRIVER_VERSION}-#{platform}.#{extension}"
+    end
+
+    def current_or_newer_version?
+      results = %x[ #{binary_path} --version ]
+      version = results.split("\n").first.split("\s")[1]
+      "v#{version}" == DRIVER_VERSION
+    end
+
+    def remove_if_stale
+      File.delete(binary_path) unless current_or_newer_version?
     end
 
     def binary_path
